@@ -105,7 +105,7 @@ function make_px4_drv() {
 
 	mkdir -p ${BASE_PATH}/source/px4_drv
 	cd ${BASE_PATH}/source/px4_drv
-	curl -fsSL https://github.com/nns779/px4_drv/tarball/master | tar -xz --strip-components=1
+	curl -fsSL https://github.com/nns779/px4_drv/tarball/develop | tar -xz --strip-components=1
 	cd ${BASE_PATH}/source/px4_drv/fwtool
 	make
 	curl -fsSLO http://plex-net.co.jp/plex/pxw3u4/pxw3u4_BDA_ver1x64.zip
@@ -118,11 +118,11 @@ function make_px4_drv() {
 	export KSRC=${BASE_PATH}/build_env/ds.${CPU_PKGARCH}-${DSM_VER}/usr/local/x86_64-pc-linux-gnu/x86_64-pc-linux-gnu/sys-root/usr/lib/modules/DSM-${DSM_VER}/build
 	make
 
-	if [ ! -d "${BASE_PATH}/results_files/px4_drv" ]; then
-		mkdir -p ${BASE_PATH}/results_files/px4_drv
+	if [ ! -d "${BASE_PATH}/results_file/px4_drv" ]; then
+		mkdir -p ${BASE_PATH}/results_file/px4_drv
 	fi
-	cp ${BASE_PATH}/source/px4_drv/driver/px4_drv.ko ${BASE_PATH}/results_files/px4_drv/
-	cp ${BASE_PATH}/source/px4_drv/fwtool/it930x-firmware.bin ${BASE_PATH}/results_files/px4_drv/
+	cp ${BASE_PATH}/source/px4_drv/driver/px4_drv.ko ${BASE_PATH}/results_file/px4_drv/
+	cp ${BASE_PATH}/source/px4_drv/fwtool/it930x-firmware.bin ${BASE_PATH}/results_file/px4_drv/
 
 	rm -rf ${BASE_PATH}/source/px4_drv
 }
@@ -136,6 +136,6 @@ make_px4_drv
 
 echo "=================================================="
 echo "completed builds."
-echo " - ${BASE_PATH}/results_files/px4_drv/px4_drv.ko"
-echo " - ${BASE_PATH}/results_files/px4_drv/it930x-firmware.bin"
+echo " - ${BASE_PATH}/results_file/px4_drv/px4_drv.ko"
+echo " - ${BASE_PATH}/results_file/px4_drv/it930x-firmware.bin"
 echo "=================================================="
