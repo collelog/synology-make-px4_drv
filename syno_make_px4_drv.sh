@@ -114,16 +114,24 @@ function make_px4_drv() {
 
 	cd ${BASE_PATH}/source/px4_drv/driver
 	sed -i -e 's/\/lib\/modules\/$(KVER)\/build/$(KSRC)/g' Makefile
-	export KVER=${BASE_PATH}/build_env/ds.${CPU_PKGARCH}-${DSM_VER}/usr/local/x86_64-pc-linux-gnu/bin/x86_64-pc-linux-gnu-
-	export KSRC=${BASE_PATH}/build_env/ds.${CPU_PKGARCH}-${DSM_VER}/usr/local/x86_64-pc-linux-gnu/x86_64-pc-linux-gnu/sys-root/usr/lib/modules/DSM-${DSM_VER}/build
-	make
+	sed -i -e 's/\/lib\/modules\/$(KVER)\/misc/$(KSRC)\/misc/g' Makefile
+
+	cp -r ${BASE_PATH}/source/px4_drv/driver/ ${BASE_PATH}/build_env/ds.${CPU_PKGARCH}-${DSM_VER}/usr/local/src/
+	cp -r ${BASE_PATH}/source/px4_drv/include/ ${BASE_PATH}/build_env/ds.${CPU_PKGARCH}-${DSM_VER}/usr/local/src/
+
+	export CROSS_COMPILE=/usr/local/x86_64-pc-linux-gnu/bin/x86_64-pc-linux-gnu-
+	export ARCH=x86_64
+	export KSRC=/usr/local/x86_64-pc-linux-gnu/x86_64-pc-linux-gnu/sys-root/usr/lib/modules/DSM-${DSM_VER}/build
+
+	chroot ${BASE_PATH}/build_env/ds.${CPU_PKGARCH}-${DSM_VER} /bin/bash -c 'cd /usr/local/src/driver; make'
 
 	if [ ! -d "${BASE_PATH}/results_file/px4_drv" ]; then
 		mkdir -p ${BASE_PATH}/results_file/px4_drv
 	fi
-	cp ${BASE_PATH}/source/px4_drv/driver/px4_drv.ko ${BASE_PATH}/results_file/px4_drv/
+	cp ${BASE_PATH}/build_env/ds.${CPU_PKGARCH}-${DSM_VER}/usr/local/src/driver/px4_drv.ko ${BASE_PATH}/results_file/px4_drv/
 	cp ${BASE_PATH}/source/px4_drv/fwtool/it930x-firmware.bin ${BASE_PATH}/results_file/px4_drv/
 
+	rm -rf ${BASE_PATH}/build_env/ds.${CPU_PKGARCH}-${DSM_VER}/usr/local/src/*
 	rm -rf ${BASE_PATH}/source/px4_drv
 }
 
