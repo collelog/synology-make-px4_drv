@@ -58,6 +58,10 @@ function prompt_for_source() {
 				CPU_PKGARCH=denverton
 				break
 				;;
+			"cedarview")
+				CPU_PKGARCH=cedarview
+				break
+				;;
 			"Quit")
 				exit 1
 				break
