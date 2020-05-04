@@ -26,7 +26,7 @@ function prompt_for_source() {
 	done
 
 	PS3="Please select CPU package arch of Synology NAS: "
-	options=("apollolake" "avoton" "braswell" "broadwell" "broadwellnk" "bromolow" "denverton" "Quit")
+	options=("apollolake" "avoton" "braswell" "broadwell" "broadwellnk" "bromolow" "cedarview" "denverton" "Quit")
 	select opt in "${options[@]}"
 	do
 		case $opt in
