@@ -1,74 +1,81 @@
 #!/bin/bash 
 
 function prompt_for_source() {
-	DSM_VER=""
-	CPU_PKGARCH=""
 
-	PS3="Please select DSM varsion of Synology NAS: "
-	options=("DSM 6.2" "DSM 6.1" "Quit")
-	select opt in "${options[@]}"
-	do
-		case $opt in
-			"DSM 6.2")
-				DSM_VER="6.2"
-				break
-				;;
-			"DSM 6.1")
-				DSM_VER="6.1"
-				break
-				;;
-			"Quit")
-				exit 1
-				break
-				;;
-			*) echo "invalid option $REPLY";;
-		esac
-	done
+	if [ -z "$DSM_VER" ]; then
+		PS3="Please select DSM varsion of Synology NAS: "
+		options=("DSM 6.2" "DSM 6.1" "Quit")
+		select opt in "${options[@]}"
+		do
+			case $opt in
+				"DSM 6.2")
+					DSM_VER="6.2"
+					break
+					;;
+				"DSM 6.1")
+					DSM_VER="6.1"
+					break
+					;;
+				"Quit")
+					exit 1
+					break
+					;;
+				*) echo "invalid option $REPLY";;
+			esac
+		done
+	fi
 
-	PS3="Please select CPU package arch of Synology NAS: "
-	options=("apollolake" "avoton" "braswell" "broadwell" "broadwellnk" "bromolow" "cedarview" "denverton" "Quit")
-	select opt in "${options[@]}"
-	do
-		case $opt in
-			"apollolake")
-				CPU_PKGARCH=apollolake
-				break
-				;;
-			"avoton")
-				CPU_PKGARCH=avoton
-				break
-				;;
-			"braswell")
-				CPU_PKGARCH=braswell
-				break
-				;;
-			"broadwell")
-				CPU_PKGARCH=broadwell
-				break
-				;;
-			"broadwellnk")
-				CPU_PKGARCH=broadwellnk
-				break
-				;;
-			"bromolow")
-				CPU_PKGARCH=bromolow
-				break
-				;;
-			"denverton")
-				CPU_PKGARCH=denverton
-				break
-				;;
-			"cedarview")
-				CPU_PKGARCH=cedarview
-				break
-				;;
-			"Quit")
-				exit 1
-				break
-				;;
-			*) echo "invalid option $REPLY";;
-		esac
-	done
+	if [ -z "$CPU_PKGARCH" ]; then
+
+		PS3="Please select CPU package arch of Synology NAS: "
+		options=("apollolake" "avoton" "braswell" "broadwell" "broadwellnk" "bromolow" "cedarview" "denverton" "x64" "Quit")
+		select opt in "${options[@]}"
+		do
+			case $opt in
+				"apollolake")
+					CPU_PKGARCH=apollolake
+					break
+					;;
+				"avoton")
+					CPU_PKGARCH=avoton
+					break
+					;;
+				"braswell")
+					CPU_PKGARCH=braswell
+					break
+					;;
+				"broadwell")
+					CPU_PKGARCH=broadwell
+					break
+					;;
+				"broadwellnk")
+					CPU_PKGARCH=broadwellnk
+					break
+					;;
+				"bromolow")
+					CPU_PKGARCH=bromolow
+					break
+					;;
+				"cedarview")
+					CPU_PKGARCH=cedarview
+					break
+					;;
+				"denverton")
+					CPU_PKGARCH=denverton
+					break
+					;;
+				"x64")
+					CPU_PKGARCH=x64
+					break
+					;;
+				"Quit")
+					exit 1
+					break
+					;;
+				*) echo "invalid option $REPLY";;
+			esac
+		done
+	fi
 
 	echo "=================================================="
 	echo "PATH:"${BASE_PATH}
@@ -109,7 +116,7 @@ function make_px4_drv() {
 
 	mkdir -p ${BASE_PATH}/source/px4_drv
 	cd ${BASE_PATH}/source/px4_drv
-	curl -fsSL https://github.com/nns779/px4_drv/tarball/develop | tar -xz --strip-components=1
+	curl -fsSL https://github.com/nns779/px4_drv/tarball/5c004d95316b8e5264b227a5737e04a4f947ad98 | tar -xz --strip-components=1
 	cd ${BASE_PATH}/source/px4_drv/fwtool
 	make
 	curl -fsSLO http://plex-net.co.jp/plex/pxw3u4/pxw3u4_BDA_ver1x64.zip
