@@ -10,7 +10,7 @@ sudo git clone https://github.com/collelog/synology-make-px4_drv.git
 
 ### 2.Dockerイメージのビルド
 ```
-docker build -t collelog/syno-make-px4_drv -f [DMSバージョン]-[CPUパッケージアーチ].Dockerfile .
+docker build -t collelog/syno-make-px4_drv -f [DSMバージョン]-[CPUパッケージアーチ].Dockerfile .
 ```
 ※SynologyNASのCPUパッケージアーチは[Synology KB](https://kb.synology.com/ja-jp/DSM/tutorial/What_kind_of_CPU_does_my_NAS_have)で確認してください。
 イメージビルド時に指定されたCPU用のクロスコンパイルツールチェインを含む親Dockerイメージ:[collelog/dsmpkg-env](https://hub.docker.com/r/collelog/dsmpkg-env)をDockerHubからダウンロードします。
