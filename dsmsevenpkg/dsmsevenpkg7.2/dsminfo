@@ -1,0 +1,8 @@
+
+declare -A platforms
+
+dsm_version_default="7.0"
+platforms[6.0]="6281 alpine alpine4k armada370 armada375 armada38x armadaxp avoton braswell bromolow cedarview comcerto2k evansport monaco qoriq x64 broadwell grantley"
+platforms[6.1]="6281 alpine alpine4k armada370 armada375 armada38x armadaxp avoton braswell broadwell bromolow cedarview comcerto2k dockerx64 evansport grantley hi3535 kvmx64 monaco qoriq x64 rtd1296 denverton apollolake"
+platforms[6.2]="6281 alpine alpine4k apollolake armada370 armada375 armada37xx armada38x armadaxp avoton braswell broadwell broadwellnk bromolow cedarview comcerto2k denverton dockerx64 evansport grantley hi3535 kvmx64 monaco qoriq rtd1296 x64"
+platforms[7.0]="alpine alpine4k apollolake armada370 armada375 armada37xx armada38x armadaxp avoton braswell broadwell broadwellnk bromolow cedarview comcerto2k denverton evansport geminilake grantley kvmcloud kvmx64 monaco purley rtd1296 v1000"
