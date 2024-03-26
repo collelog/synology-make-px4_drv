@@ -11,7 +11,7 @@ function make_px4_drv() {
 
 	mkdir -p ${PX4DRV_BUILD_PATH}/source/px4_drv
 	cd ${PX4DRV_BUILD_PATH}/source/px4_drv
-	curl -fsSL https://github.com/nns779/px4_drv/tarball/develop | tar -xz --strip-components=1
+	curl -fsSL https://github.com/tsukumijima/px4_drv/tarball/develop | tar -xz --strip-components=1
 	cd ${PX4DRV_BUILD_PATH}/source/px4_drv/fwtool
 	make
 	curl -fsSLO http://plex-net.co.jp/plex/pxw3u4/pxw3u4_BDA_ver1x64.zip
